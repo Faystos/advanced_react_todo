@@ -1,0 +1,117 @@
+@import '../mixins.scss';
+
+// Общий блок сайдбара
+.todo__sidebar {
+  width: 200px;
+  min-height: 530px;
+  height: 100%;
+  padding: 57px 0 0 0;
+  box-shadow: -15px -1px 29px -19px rgba(34, 60, 80, 0.2) inset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4f6f8;
+  border-right: 1px solid #f1f1f1;
+
+  // Кнопки управления добавить и все задачи
+
+  .button-control {
+    @include button-reset;
+    width: 160px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;    
+  }
+
+  .todo__all_task {
+    button {
+      @include active-item;
+      padding: 0 53px 0 8px;
+      margin-left: 8px;
+      margin-bottom: 28px;
+
+      &:hover {
+        svg {
+          stroke: #000000;
+        }
+      }
+    }
+  }
+
+  .todo__add_task {
+    button {
+      @include active-item;
+      padding: 0 18px 0 15px;
+      color: #767676;
+
+      &:hover {
+        color: #000000;
+
+        svg {          
+          stroke: #000000;
+        }
+      }
+    }    
+  }
+
+  // Блок со задачами
+
+  .todo__tasks {
+    margin-bottom: 27px;
+  }
+
+  // Задача
+
+  .todo__task_item {
+    @include active-item;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 160px;
+    height: 37px;
+    margin-bottom: 5px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all 0.5s;     
+    
+    &:hover {
+      .todo__task_del {
+        transform: scale(1);        
+      }
+
+      svg:hover {
+        fill: #000000;
+        stroke: #000000;
+      }
+    }
+
+    .todo__task_info {
+      width: 120px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .todo__task_color {
+      @include color-item;
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 10px;      
+    }
+
+    .todo__task_title {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .todo__task_del {
+      @include button-reset;      
+      transition: all 0.5s;
+      transform: scale(0);
+    }
+  }
+}

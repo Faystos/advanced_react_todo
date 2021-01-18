@@ -1,0 +1,55 @@
+@mixin button-reset {
+  padding: 0;
+  border: none;
+  font-family: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+@mixin active-item {
+  &--active, &:hover {
+    box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
+    background-color: #ffffff;      
+  } 
+}
+
+@mixin color-item {
+
+  &--green {
+    background-color: #42b883;
+  }
+
+  &--blue {
+    background-color: #64c4ed;
+  }
+
+  &--pink {
+    background-color: #ffbbcc;
+  }
+
+  &--light_green {
+    background-color: #b6e6bd;
+  }
+
+  &--gray {
+    background-color: #c9d1d3;
+  }
+  
+}
+
+@mixin opacity-link {
+  &:hover {
+    opacity: 0.6;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+@mixin hide-font {
+  font-size: 0;
+  line-height: 0;
+}
