@@ -9,10 +9,17 @@
 }
 
 @mixin active-item {
+  transition: all 0.5s; 
+  
   &--active, &:hover {
     box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
     background-color: #ffffff;      
   } 
+
+  &:active {
+    background-color: transparent;
+    box-shadow:none;
+  }
 }
 
 @mixin color-item {
@@ -35,6 +42,18 @@
 
   &--gray {
     background-color: #c9d1d3;
+  }
+
+  &--purple {
+    background-color :#c355f5;
+  }
+
+  &--black{
+    background-color: #000000;
+  }
+
+  &--red{
+    background-color: #ff6464;
   }
   
 }

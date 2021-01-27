@@ -1,9 +1,10 @@
 @import '../mixins.scss';
+@import '../utils.scss';
 
 // Общий блок сайдбара
-.todo__sidebar {
+.sidebar {
   width: 200px;
-  min-height: 530px;
+  min-height: 570px;
   height: 100%;
   padding: 57px 0 0 0;
   box-shadow: -15px -1px 29px -19px rgba(34, 60, 80, 0.2) inset;
@@ -13,19 +14,10 @@
   background-color: #f4f6f8;
   border-right: 1px solid #f1f1f1;
 
-  // Кнопки управления добавить и все задачи
+  // Кнопки управления добавить и все задачи  
 
-  .button-control {
-    @include button-reset;
-    width: 160px;
-    height: 37px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;    
-  }
-
-  .todo__all_task {
-    button {
+  .sidebar__all_task {
+    .button-control {
       @include active-item;
       padding: 0 53px 0 8px;
       margin-left: 8px;
@@ -39,8 +31,9 @@
     }
   }
 
-  .todo__add_task {
-    button {
+  .sidebar__add_task {
+    position: relative;
+    .button-control {
       @include active-item;
       padding: 0 18px 0 15px;
       color: #767676;
@@ -57,13 +50,13 @@
 
   // Блок со задачами
 
-  .todo__tasks {
+  .sidebar__tasks {
     margin-bottom: 27px;
   }
 
   // Задача
 
-  .todo__task_item {
+  .sidebar__task_item {
     @include active-item;
     display: flex;
     align-items: center;
@@ -72,11 +65,10 @@
     height: 37px;
     margin-bottom: 5px;
     padding: 5px 12px;
-    cursor: pointer;
-    transition: all 0.5s;     
+    cursor: pointer;         
     
     &:hover {
-      .todo__task_del {
+      .sidebar__task_del {
         transform: scale(1);        
       }
 
@@ -86,14 +78,14 @@
       }
     }
 
-    .todo__task_info {
+    .sidebar__task_info {
       width: 120px;
       height: 20px;
       display: flex;
       align-items: center;
     }
 
-    .todo__task_color {
+    .sidebar__task_color {
       @include color-item;
       display: block;
       width: 10px;
@@ -102,16 +94,139 @@
       margin-right: 10px;      
     }
 
-    .todo__task_title {
+    .sidebar__task_title {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
 
-    .todo__task_del {
-      @include button-reset;      
-      transition: all 0.5s;
+    .sidebar__task_del {
+      @include button-reset;
+      transition: all 0.5s;     
       transform: scale(0);
+    }
+  }
+
+  // Всплывающее окно
+
+  .sidebar__add_task_popup {
+    width: 235px;
+    height: 148px;
+    border-radius: 10px;
+    position: absolute;
+    top: 48px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05);
+    padding: 18px;    
+    background-color: #ffffff;
+  }
+
+  // Кнопка закрытия всплывающего окна
+
+  .sidebar__add_task_popup_close {
+    @include button-reset;
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background-color: #5c5c5c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+
+    &:hover {
+      svg {
+        stroke: red;
+        fill: red;
+      }
+    }
+
+    &:active {
+      svg {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  // Текстовый инпут
+
+  .sidebar__form_input_text {
+    margin-bottom: 13px;
+
+    input {
+      width: 100%;
+      height: 32px;
+      border: 1px solid  #efefef;     
+      outline: none;
+      padding: 7px 11px;
+
+      &:focus {
+        border-color: rgba(34, 60, 80, 0.2);
+      }
+    }
+  }
+
+  // Радио инпуты
+
+  .sidebar__form_input_radio {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 13px;
+
+    .sidebar__radio_color {
+      @include color-item;
+      position: relative;
+      display: block;         
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s;
+      
+      &:hover {
+        box-shadow: 1px 10px 8px 0px rgba(50, 50, 50, 0.75);
+      }
+    }    
+    
+    .sidebar__radio:checked + .sidebar__radio_color {
+      &::before {
+        content: '';
+        display: block;
+        position: absolute; 
+        width: 25px;
+        height: 25px;    
+        background-color: transparent;    
+        border: 1px solid black;
+        border-radius: 50%;
+        z-index: 5;        
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);  
+      }
+
+      &:hover {
+        box-shadow: none;
+      }
+    }    
+  } 
+
+  // Кнопка добавления задачи
+  
+  .sidebar__button_submit {
+    @include  button-reset;
+    width: 100%;
+    padding: 10px;
+    background-color: #4dd599;
+    border-radius: 4px;
+    color: #ffffff;
+
+    &:hover {
+      box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
+    }
+
+    &:active {
+      box-shadow: none;
     }
   }
 }
