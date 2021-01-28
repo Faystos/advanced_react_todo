@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import SvgIcon from '../svgIcon';
 import ButtonControl from '../buttonControl';
 import FormAddTask from '../formAddTask';
 import BlockRadioInputs from '../BlockRadioInputs';
+import Context from '../../context';
 
 const AddTask = ({handlerPopup, activePopup, data, updateData}) => {
+
+  const {dataList, dataColors} = useContext(Context);
 
   const [nameTask, setNameTask] = useState('');
   const [taskColor, setTaskColor] = useState('');
@@ -20,9 +23,9 @@ const AddTask = ({handlerPopup, activePopup, data, updateData}) => {
   const addNewTask = evt => {
     evt.preventDefault();
     updateData({
-      id: `task${data.length + 1}`,
-      color: taskColor,
-      name: nameTask      
+      id: `${dataList.length + 1}`,      
+      name: nameTask,
+      colorId: dataColors.filter(({name})=> name === taskColor)[0].id,    
     });    
   }
 

@@ -1,34 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import ButtonControl from '../buttonControl';
 import SvgIcon from '../svgIcon';
-import arrMocks from '../../store/mock/mock';
 import AddTask from '../addTask';
 import TasksList from '../tasksList';
+import Context from '../../context';
 
 const Sidebar = () => {
-
-  const [data, setData] = useState(null);
+  const { dataList, updateData, deleteTask } = useContext(Context);  
   const [activePopup, setActivePopup] = useState(false);
-
-  useEffect(()=> {
-    setData(data => data = arrMocks);    
-  }, []); 
-
   const handlerPopup = () => {
     setActivePopup(!activePopup);    
-  }
-
-  const updateData = newTask => {
-    const newData = [...data, newTask];    
-    setData(data => data = newData);    
-  }  
-
-  const deleteTask = id => {
-    const newData = data.filter(task => task.id !== id);
-    setData(data => data = newData);
-  }
-
-  const tasksList = data ? <TasksList data={data} deleteTask={deleteTask}/> : null; 
+  };
+  const tasksList = dataList ? <TasksList deleteTask={deleteTask}/> : null; 
 
   return (
     <div className='sidebar'>
@@ -38,9 +21,9 @@ const Sidebar = () => {
       <div className='sidebar__tasks'>
         { tasksList }
       </div>
-      <AddTask handlerPopup={handlerPopup} activePopup={activePopup} data={data} updateData={updateData}/>       
+      <AddTask handlerPopup={handlerPopup} activePopup={activePopup} updateData={updateData}/>       
     </div>
   );
-}
+};
 
 export default Sidebar;
