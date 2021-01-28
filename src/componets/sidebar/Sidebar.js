@@ -12,15 +12,23 @@ const Sidebar = () => {
 
   useEffect(()=> {
     setData(data => data = arrMocks);    
-  }, [ data ]);
+  }, []); 
 
   const handlerPopup = () => {
     setActivePopup(!activePopup);    
   }
 
-  
+  const updateData = newTask => {
+    const newData = [...data, newTask];    
+    setData(data => data = newData);    
+  }  
 
-  const tasksList = data ? <TasksList data={data}/> : null; 
+  const deleteTask = id => {
+    const newData = data.filter(task => task.id !== id);
+    setData(data => data = newData);
+  }
+
+  const tasksList = data ? <TasksList data={data} deleteTask={deleteTask}/> : null; 
 
   return (
     <div className='sidebar'>
@@ -30,11 +38,9 @@ const Sidebar = () => {
       <div className='sidebar__tasks'>
         { tasksList }
       </div>
-      <AddTask handlerPopup={handlerPopup} activePopup={activePopup}/>       
+      <AddTask handlerPopup={handlerPopup} activePopup={activePopup} data={data} updateData={updateData}/>       
     </div>
   );
 }
-
-
 
 export default Sidebar;
