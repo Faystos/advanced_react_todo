@@ -14,8 +14,7 @@
   background-color: #f4f6f8;
   border-right: 1px solid #f1f1f1;
 
-  // Кнопки управления добавить и все задачи  
-
+  // Кнопки управления добавить и все задачи
   .sidebar__all_task {
     width: 180px;
     margin-bottom: 28px;
@@ -51,7 +50,6 @@
   }
 
   // Блок со задачами
-
   .sidebar__tasks {
     width: 180px;    
     max-height: 210px;    
@@ -61,7 +59,6 @@
   }
 
   // Задача
-
   .sidebar__task_item {
     @include active-item;
     display: flex;
@@ -101,6 +98,7 @@
     }
 
     .sidebar__task_title {
+      width: 100px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -114,7 +112,6 @@
   }
 
   // Всплывающее окно
-
   .sidebar__add_task_popup {
     width: 235px;
     height: 148px;
@@ -127,7 +124,6 @@
   }
 
   // Кнопка закрытия всплывающего окна
-
   .sidebar__add_task_popup_close {
     @include button-reset;
     width: 21px;
@@ -156,7 +152,6 @@
   }
 
   // Текстовый инпут
-
   .sidebar__form_input_text {
     margin-bottom: 13px;
 
@@ -174,7 +169,6 @@
   }
 
   // Радио инпуты
-
   .sidebar__form_input_radio {
     display: flex;
     justify-content: space-between;
@@ -217,8 +211,7 @@
     }    
   } 
 
-  // Кнопка добавления задачи
-  
+  // Кнопка добавления задачи  
   .sidebar__button_submit {
     @include  button-reset;
     width: 100%;
