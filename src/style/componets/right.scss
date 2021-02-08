@@ -1,0 +1,104 @@
+@import '../utils.scss';
+@import '../mixins.scss';
+
+.right {
+  width: 100%;
+  padding: 57px 57px 15px;
+
+
+  // Блок с заголовком таска
+  .right__task_title {
+
+    border-bottom: 1px solid #f2f2f2;
+    padding-bottom: 20px;
+    margin-bottom: 31px;
+
+    h2 {
+      font-size: 32px;
+      line-height: 39px;
+      color: #64C4ED;
+    }
+  }
+
+  // Блок задач 
+  .right__tasks {
+    width: 100%;
+  }
+
+
+
+  // Таска
+  .right__task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    
+
+    .right__task_del {
+      @include button-reset;
+      margin-left: 10px;
+      display: none;
+
+      .right__task_del--done {
+        display: block;
+      }
+    } 
+    
+    label {
+      display: block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #e8e8e8;
+      border-radius: 50%;
+      margin-right: 15px;
+      background-color: transparent;
+      overflow: hidden;
+      position: relative;
+
+      &:hover {
+        &::before{
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #f2f2f2; 
+         
+        }
+      }
+    }
+
+    input:checked + label {
+      &::before {  
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;       
+        background-color: #4dd599;        
+      }
+      
+      &:hover {
+
+        &::before {
+          background-color: #4dd599;
+        }       
+      }      
+    }
+  }
+
+  .right__task_check {
+    display: flex;
+
+    span {
+      display: block;
+      max-width: 600px;
+      height: auto;
+    }      
+  } 
+}
