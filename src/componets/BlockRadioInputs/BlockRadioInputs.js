@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import ColorInputRadio from '../ColorInputRadio';
+import ColorInputRadio from '../colorInputRadio';
 import Context from '../../context';
 
 const BlockRadioInputs = ({ handlerInputRadio }) => {

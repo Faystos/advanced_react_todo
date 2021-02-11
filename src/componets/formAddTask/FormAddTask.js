@@ -1,5 +1,5 @@
 import React from 'react';
-import TaskInputText from '../TaskInputText';
+import TaskInputText from '../taskInputText';
 
 
 const FormAddTask = ({ nameTask, handlerInputText, addNewTask, children }) => {  

@@ -38,11 +38,7 @@
     .right__task_del {
       @include button-reset;
       margin-left: 10px;
-      display: none;
-
-      .right__task_del--done {
-        display: block;
-      }
+      display: none;      
     } 
     
     label {
@@ -90,15 +86,31 @@
         }       
       }      
     }
-  }
-
-  .right__task_check {
-    display: flex;
 
     span {
       display: block;
       max-width: 600px;
       height: auto;
-    }      
+    } 
+
+    &--done {
+      .right__task_del {
+        display: block;
+      }
+
+      span {
+        text-decoration: line-through;
+      }
+    }
+  }
+
+  .right__task_check {
+    display: flex;
+
+    // span {
+    //   display: block;
+    //   max-width: 600px;
+    //   height: auto;
+    // }      
   } 
 }

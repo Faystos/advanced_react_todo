@@ -1,17 +1,17 @@
 import React, { useState, useContext } from 'react';
 import ButtonControl from '../buttonControl';
 import SvgIcon from '../svgIcon';
-import AddTask from '../addTask';
-import TasksList from '../tasksList';
+import AddFolder from '../addFolder';
+import FoldersList from '../foldersList';
 import Context from '../../context';
 
 const Sidebar = () => {
-  const { dataList, updateData, deleteTask } = useContext(Context);  
+  const { dataFolder, addNewFolder, deleteFolder } = useContext(Context);  
   const [activePopup, setActivePopup] = useState(false);
   const handlerPopup = () => {
     setActivePopup(!activePopup);    
   };
-  const tasksList = dataList ? <TasksList deleteTask = { deleteTask }/> : null; 
+  const folderList = dataFolder ? <FoldersList deleteFolder = { deleteFolder }/> : null; 
 
   return (
     <div className = 'sidebar'>
@@ -19,9 +19,9 @@ const Sidebar = () => {
         <ButtonControl svg = { <SvgIcon name={ 'all' } color = { '#7c7c7c' } size = { 18 } className = { '' }/> } text = { `Все задачи` }/>
       </div>
       <div className = 'sidebar__tasks'>
-        { tasksList }
+        { folderList }
       </div>
-      <AddTask handlerPopup = { handlerPopup } activePopup = { activePopup } updateData = { updateData }/>       
+      <AddFolder handlerPopup = { handlerPopup } activePopup = { activePopup } addNewFolder = { addNewFolder }/>       
     </div>
   );
 };

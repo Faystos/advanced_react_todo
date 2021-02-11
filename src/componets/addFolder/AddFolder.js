@@ -2,12 +2,12 @@ import React, { useState, useContext } from "react";
 import SvgIcon from '../svgIcon';
 import ButtonControl from '../buttonControl';
 import FormAddTask from '../formAddTask';
-import BlockRadioInputs from '../BlockRadioInputs';
+import BlockRadioInputs from '../blockRadioInputs';
 import Context from '../../context';
 
-const AddTask = ({ handlerPopup, activePopup, updateData }) => {
+const AddFolder = ({ handlerPopup, activePopup, addNewFolder }) => {
 
-  const { dataList, dataColors } = useContext(Context);
+  const { dataFolder, dataColors } = useContext(Context);
   const [nameTask, setNameTask] = useState('');
   const [taskColor, setTaskColor] = useState('');
 
@@ -36,8 +36,8 @@ const AddTask = ({ handlerPopup, activePopup, updateData }) => {
       return;
     }
 
-    updateData({
-      id: `${ dataList.length + 1 }`,      
+    addNewFolder({
+      id: `${ dataFolder.length + 1 }`,      
       name: nameTask,
       colorId: dataColors.filter(({ name })=> name === taskColor)[0].id,    
     });  
@@ -72,4 +72,4 @@ const PoPup = ({nameTask, handlerPopup, handlerInputNameTask, handlerInputColorT
   );
 }
 
-export default AddTask;
+export default AddFolder;

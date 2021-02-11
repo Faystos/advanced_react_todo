@@ -2,23 +2,23 @@ import React, { useState, useContext } from "react";
 import SvgIcon from '../svgIcon';
 import Context from '../../context';
 
-const TasksList = ({ deleteTask }) => {
-  const { dataList, dataColors, selectItemTask } = useContext(Context);
+const FoldersList = ({ deleteFolder }) => {
+  const { dataFolder, dataColors, selectItemTask } = useContext(Context);
   const [selectTask, setSelectTask] = useState(null);
   return (   
     <List
-      dataList = { dataList } 
+    dataFolder = { dataFolder } 
       dataColors = { dataColors } 
-      deleteTask = { deleteTask } 
+      deleteFolder = { deleteFolder } 
       setSelectTask = { setSelectTask } 
       selectTask = { selectTask }
       selectItemTask = {selectItemTask}/>  
   );
 };
 
-const List = ({ dataList, dataColors, deleteTask, setSelectTask, selectTask, selectItemTask }) => {  
+const List = ({ dataFolder, dataColors, deleteFolder, setSelectTask, selectTask, selectItemTask }) => {  
   return (
-    dataList.map(({ id, name, colorId }) => {
+    dataFolder.map(({ id, name, colorId }) => {
       let activClassName = selectTask === id ? `sidebar__task_item--active` : '';
       const color = dataColors.filter(color => color.id === colorId)[0].name;
 
@@ -31,7 +31,7 @@ const List = ({ dataList, dataColors, deleteTask, setSelectTask, selectTask, sel
             <span className={ `sidebar__task_color sidebar__task_color--${ color }` }></span>
             <span className='sidebar__task_title'>{ name }</span>
           </div>
-          <button type = 'button' className = 'sidebar__task_del' onClick = { () => deleteTask(id) }>
+          <button type = 'button' className = 'sidebar__task_del' onClick = { () => deleteFolder(id) }>
             <SvgIcon name = { 'close' } color = { '#e3e3e3' } size = { 10 } className = { '' }/>
           </button>        
         </div>
@@ -40,4 +40,4 @@ const List = ({ dataList, dataColors, deleteTask, setSelectTask, selectTask, sel
   );  
 };
 
- export default TasksList;
+ export default FoldersList;
