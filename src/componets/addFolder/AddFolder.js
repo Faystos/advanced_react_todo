@@ -65,7 +65,7 @@ const PoPup = ({nameTask, handlerPopup, handlerInputNameTask, handlerInputColorT
   return (
     <div className = 'sidebar__add_task_popup'>
       <button type = 'button' className = 'sidebar__add_task_popup_close' onClick = { () => handlerPopup() }><SvgIcon name = { 'close' } color = { '#ffff' } size = { 7 } className = { '' }/></button>
-      <FormAddTask nameTask = { nameTask } handlerInputText = { handlerInputNameTask } addNewTask = { addNewTask }>
+      <FormAddTask nameTask = { nameTask } handlerInputNameTask = { handlerInputNameTask } addNewTask = { addNewTask }>
         <BlockRadioInputs handlerInputRadio = { handlerInputColorTask }/>
       </FormAddTask>
     </div>

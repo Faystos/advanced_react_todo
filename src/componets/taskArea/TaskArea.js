@@ -1,11 +1,40 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
+import FormAddTask from '../formAddTask';
 import SvgIcon from '../svgIcon';
 import Context from '../../context';
 
 const TaskArea = () => { 
   
-  const {dataFolder, dataTasks,  selectTaskId, compledetTask, deleteDoneTask} = useContext(Context); 
+  const {dataFolder, dataTasks,  selectTaskId, compledetTask, deleteDoneTask, addNewTask} = useContext(Context); 
+
+  const [nameTask, setNameTask] = useState('');
+
+  const handlerInputNameTask = (value) => {
+    setNameTask(nameTask => nameTask = value);      
+  }
+
+  const resetForm = () => {
+    setNameTask('');
+  }
+
+  const newTask = evt => {
+    evt.preventDefault(); 
+    
+    if(!nameTask) {
+      alert('Введите имя задачи');
+      return;
+    }
+
+    addNewTask( {
+      completed: false,
+      id: dataTasks.length + 1,
+      listId: title[0].id,
+      text: nameTask
+    });
+
+    resetForm();
+  }
  
   const title = dataFolder &&  selectTaskId ? dataFolder.filter(task => {
     const item = selectTaskId && task.id === selectTaskId ? task : null;    
@@ -21,13 +50,13 @@ const TaskArea = () => {
   let viewTask = viewTitile && tasks && tasks.length ?  <TaskList tasks = { tasks } compledetTask = { compledetTask } deleteDoneTask = { deleteDoneTask }/> : null;  
 
   return (                
-    viewTitile && <TaskName viewTitile = { viewTitile } viewTask = { viewTask } />          
+    viewTitile && <Task viewTitile = { viewTitile } viewTask = { viewTask } nameTask = { nameTask } handlerInputNameTask = { handlerInputNameTask } addNewTask = { newTask }/>          
   );
 }
 
 export default TaskArea;
 
-const TaskName = ({ viewTitile, viewTask }) => {
+const Task = ({ viewTitile, viewTask, nameTask, handlerInputNameTask, addNewTask }) => {
   return (
     <div className = 'right__task_area'>
     <div className = 'right__task_title'>
@@ -36,6 +65,7 @@ const TaskName = ({ viewTitile, viewTask }) => {
     <div className = 'right__tasks'>
       { viewTask }
     </div>
+    <FormAddTask nameTask = { nameTask } handlerInputNameTask = { handlerInputNameTask } addNewTask = { addNewTask }/>
     </div>
     
   );

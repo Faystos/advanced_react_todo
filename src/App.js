@@ -21,10 +21,15 @@ const  App = () => {
     setDataColors(dataColors => dataColors = colors);
   }, []);
 
-  const addNewFolder = newTask => {
-    const newData = [...dataFolder, newTask];    
+  const addNewFolder = newFolder => {
+    const newData = [...dataFolder, newFolder];    
     setDataFolder(data => data = newData);       
-  }  
+  }
+
+  const addNewTask = newTask => {
+    const newData = [...dataTasks, newTask]; 
+    setDataTasks(data => data = newData);
+  }
 
   const deleteFolder = id => {
     const newData = dataFolder.filter(task => task.id !== id);
@@ -60,6 +65,7 @@ const  App = () => {
     selectItemTask,
     compledetTask,
     deleteDoneTask,
+    addNewTask,
   };
   
   return (
