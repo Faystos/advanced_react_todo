@@ -55,6 +55,17 @@ const  App = () => {
     setDataTasks(data => data = newData);
   }
 
+  const updateTitleDataFolder = value => {
+    const newDataFolder = dataFolder.map(folder => {
+      if (folder.id === selectTaskId) {
+        folder.name = value;       
+      }
+      return folder;
+    });
+
+    setDataFolder(data => data = newDataFolder);
+  }
+
   const appContext = {
     dataFolder,
     dataTasks,
@@ -66,6 +77,7 @@ const  App = () => {
     compledetTask,
     deleteDoneTask,
     addNewTask,
+    updateTitleDataFolder,
   };
   
   return (

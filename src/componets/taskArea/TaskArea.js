@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 
 import FormAddTask from '../formAddTask';
 import SvgIcon from '../svgIcon';
@@ -56,11 +56,13 @@ const TaskArea = () => {
 
 export default TaskArea;
 
+// ****************************************************************************************
+
 const Task = ({ viewTitile, viewTask, nameTask, handlerInputNameTask, addNewTask }) => {
   return (
     <div className = 'right__task_area'>
-    <div className = 'right__task_title'>
-      <h2>{ viewTitile }</h2>
+    <div className = 'right__task_title'>     
+      <InputTaskTitle value = { viewTitile }/>
     </div>
     <div className = 'right__tasks'>
       { viewTask }
@@ -94,4 +96,54 @@ const TaskList = ({ tasks, compledetTask, deleteDoneTask }) => {
 }
 
 
+const InputTaskTitle = ({ value }) => {
+  const {updateTitleDataFolder} = useContext(Context);
+  const [inputActive, setInputActive] = useState(false);
+  const [inputValue, setInputValue] = useState(value);
+  const inputTitle = useRef(null);
 
+  useEffect(() => {
+    setInputValue(inputValue => inputValue = value);
+    setInputActive(inputActive => inputActive = false);
+  }, [value]);
+
+  const inputStatusActive = !inputActive ? true : false;
+
+  const handlerButtonActiveInput = evt => {
+    evt.preventDefault();   
+
+    if (!inputActive) {
+      setInputActive(active => active = !inputActive);
+      inputTitle.current.focus();
+    } else if (inputActive) {
+      setInputActive(active => active = !inputActive);
+      updateTitleDataFolder(inputValue);      
+    }
+
+    inputTitle.current.focus();   
+
+  }
+
+  const handlerChangeInput = evt => {
+    setInputValue(inputValue => inputValue = evt.target.value);
+  }
+
+  const handlerEnterDown = evt => {
+    if (evt.keyCode === 13) {
+      setInputActive(active => active = false);
+      setInputValue(inputValue => inputValue = evt.target.value); 
+      updateTitleDataFolder(inputValue)        
+    }    
+  }
+
+  return (
+    <div>
+       <label className = 'visually-hidden' htmlFor='title-input'>Заголовок</label>
+      <input type = 'text' id = 'title-input' value = { inputValue }  onChange = { handlerChangeInput }  onKeyDown = { handlerEnterDown } readOnly = { inputStatusActive } ref = { inputTitle }/>
+     
+      
+
+      <button onClick = { handlerButtonActiveInput }><SvgIcon name = { 'edit' } color = { '#e3e3e3' } size = { 15 } className = { '' }/></button>
+    </div>
+  );
+}
